@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Wand2, Menu, Home, History, BookOpen, Settings } from 'lucide-react';
+import { Wand2, Menu, Home, History, BookOpen, Settings, Github } from 'lucide-react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +17,12 @@ const Header = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleGithubClick = () => {
+    // 这里可以添加GitHub连接逻辑
+    // 目前跳转到Lovable的GitHub集成说明页面
+    window.open('https://docs.lovable.dev/tips-tricks/github-integration', '_blank');
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -79,11 +85,28 @@ const Header = () => {
                   <span>{item.label}</span>
                 </Link>
               ))}
+              
+              <Button
+                onClick={handleGithubClick}
+                variant="outline"
+                className="flex items-center space-x-2 justify-start px-3 py-2"
+              >
+                <Github className="h-5 w-5" />
+                <span>连接 GitHub</span>
+              </Button>
             </div>
           </SheetContent>
         </Sheet>
 
         <div className="flex items-center space-x-2 ml-auto">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleGithubClick}
+            className="hidden md:flex"
+          >
+            <Github className="h-5 w-5" />
+          </Button>
           <Button
             asChild
             className="bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700"
